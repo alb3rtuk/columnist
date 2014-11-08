@@ -2,3 +2,4 @@ pkg/*
 wiki
 .idea/
 .DS_Store
+anchorman-*.gem
