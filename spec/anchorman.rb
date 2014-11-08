@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe CommandLineReporter do
+describe Anchorman do
   let :use_class do
     Class.new do
-      include CommandLineReporter
+      include Anchorman
     end
   end
 
@@ -30,12 +30,12 @@ describe CommandLineReporter do
 
     it 'specifies the progress formatter' do
       subject.formatter = 'progress'
-      expect(subject.formatter.class).to eq(CommandLineReporter::ProgressFormatter)
+      expect(subject.formatter.class).to eq(Anchorman::ProgressFormatter)
     end
 
     it 'specifies the nested formatter' do
       subject.formatter = 'nested'
-      expect(subject.formatter.class).to eq(CommandLineReporter::NestedFormatter)
+      expect(subject.formatter.class).to eq(Anchorman::NestedFormatter)
     end
   end
 
@@ -45,7 +45,7 @@ describe CommandLineReporter do
         subject.report { }
       }
 
-      expect(subject.formatter.class).to eq(CommandLineReporter::NestedFormatter)
+      expect(subject.formatter.class).to eq(Anchorman::NestedFormatter)
     end
 
     it 'uses the progress formatter' do
@@ -54,7 +54,7 @@ describe CommandLineReporter do
         subject.report { }
       }
 
-      expect(subject.formatter.class).to eq(CommandLineReporter::ProgressFormatter)
+      expect(subject.formatter.class).to eq(Anchorman::ProgressFormatter)
     end
 
     it 'does not mask other application errors when a formatter is not set' do

@@ -1,67 +1,67 @@
 require 'spec_helper'
 
-describe CommandLineReporter::Table do
+describe Anchorman::Table do
   context 'creation' do
     it 'defaults options hash' do
       expect {
-        CommandLineReporter::Table.new
+        Anchorman::Table.new
       }.to_not raise_error
     end
 
     it 'defaults the border' do
-      expect(CommandLineReporter::Table.new.border).to be_false
+      expect(Anchorman::Table.new.border).to be_false
     end
 
     it 'accepts the border' do
-      expect(CommandLineReporter::Table.new(:border => true).border).to eq(true)
+      expect(Anchorman::Table.new(:border => true).border).to eq(true)
     end
 
     it 'defaults the border_color' do
-      expect(CommandLineReporter::Table.new.border_color).to be_false
+      expect(Anchorman::Table.new.border_color).to be_false
     end
 
     it 'accepts the border_color' do
-      expect(CommandLineReporter::Table.new(:border_color => true).border_color).to eq(true)
+      expect(Anchorman::Table.new(:border_color => true).border_color).to eq(true)
     end
 
     it 'output encoding should be ascii' do
-      expect(CommandLineReporter::Table.new(:encoding => :ascii).encoding).to eq(:ascii)
+      expect(Anchorman::Table.new(:encoding => :ascii).encoding).to eq(:ascii)
     end
 
     it 'output encoding should be unicode' do
-      expect(CommandLineReporter::Table.new.encoding).to eq(:unicode)
+      expect(Anchorman::Table.new.encoding).to eq(:unicode)
     end
   end
 
   context 'rows' do
     it 'allows addition' do
-      cols = [CommandLineReporter::Column.new('test1'), CommandLineReporter::Column.new('test2')]
-      row = CommandLineReporter::Row.new
+      cols = [Anchorman::Column.new('test1'), Anchorman::Column.new('test2')]
+      row = Anchorman::Row.new
       cols.each {|c| row.add(c)}
       expect {
-        CommandLineReporter::Table.new.add(row)
+        Anchorman::Table.new.add(row)
       }.to_not raise_error
     end
 
     context 'inherits' do
       before :each do
-        @table = CommandLineReporter::Table.new
-        row = CommandLineReporter::Row.new(:color => 'red')
+        @table = Anchorman::Table.new
+        row = Anchorman::Row.new(:color => 'red')
         (
           @cols1 = [
-            CommandLineReporter::Column.new('asdf', :width => 5),
-            CommandLineReporter::Column.new('qwer', :align => 'right', :color => 'purple'),
-            CommandLineReporter::Column.new('tutu', :color => 'green'),
-            CommandLineReporter::Column.new('uiui', :bold => true),
+            Anchorman::Column.new('asdf', :width => 5),
+            Anchorman::Column.new('qwer', :align => 'right', :color => 'purple'),
+            Anchorman::Column.new('tutu', :color => 'green'),
+            Anchorman::Column.new('uiui', :bold => true),
           ]
         ).each {|c| row.add(c)}
         @table.add(row)
-        row = CommandLineReporter::Row.new
+        row = Anchorman::Row.new
         (@cols2 = [
-            CommandLineReporter::Column.new('test'),
-            CommandLineReporter::Column.new('test'),
-            CommandLineReporter::Column.new('test', :color => 'blue'),
-            CommandLineReporter::Column.new('test'),
+            Anchorman::Column.new('test'),
+            Anchorman::Column.new('test'),
+            Anchorman::Column.new('test', :color => 'blue'),
+            Anchorman::Column.new('test'),
           ]
         ).each {|c| row.add(c)}
         @table.add(row)
@@ -93,11 +93,11 @@ describe CommandLineReporter::Table do
 
       context 'with header row' do
         before :each do
-          @table = CommandLineReporter::Table.new
-          row = CommandLineReporter::Row.new(:header => true)
+          @table = Anchorman::Table.new
+          row = Anchorman::Row.new(:header => true)
           @cols1.each {|c| row.add(c)}
           @table.add(row)
-          row = CommandLineReporter::Row.new
+          row = Anchorman::Row.new
           @cols2.each {|c| row.add(c)}
           @table.add(row)
         end
@@ -123,20 +123,20 @@ describe CommandLineReporter::Table do
   
   describe '#auto_adjust_widths' do
     it 'sets the widths of each column in each row to the maximum required width for that column' do
-      table = CommandLineReporter::Table.new.tap do |t|
+      table = Anchorman::Table.new.tap do |t|
         t.add(
-          CommandLineReporter::Row.new.tap do |r|
-            r.add CommandLineReporter::Column.new('medium length')
-            r.add CommandLineReporter::Column.new('i am pretty long') # longest column
-            r.add CommandLineReporter::Column.new('short', :padding => 100)
+          Anchorman::Row.new.tap do |r|
+            r.add Anchorman::Column.new('medium length')
+            r.add Anchorman::Column.new('i am pretty long') # longest column
+            r.add Anchorman::Column.new('short', :padding => 100)
           end
         )
 
         t.add(
-          CommandLineReporter::Row.new.tap do |r|
-            r.add CommandLineReporter::Column.new('longer than medium length') # longest column
-            r.add CommandLineReporter::Column.new('shorter')
-            r.add CommandLineReporter::Column.new('longer than short') # longest column (inherits padding)
+          Anchorman::Row.new.tap do |r|
+            r.add Anchorman::Column.new('longer than medium length') # longest column
+            r.add Anchorman::Column.new('shorter')
+            r.add Anchorman::Column.new('longer than short') # longest column (inherits padding)
           end
         )
       end
@@ -144,9 +144,9 @@ describe CommandLineReporter::Table do
       table.auto_adjust_widths
 
       table.rows.each do |row|
-        expect(row.columns[0].width).to eq(CommandLineReporter::Column.new('longer than medium length').required_width)
-        expect(row.columns[1].width).to eq(CommandLineReporter::Column.new('i am pretty long').required_width)
-        expect(row.columns[2].width).to eq(CommandLineReporter::Column.new('longer than short', :padding => 100).required_width)
+        expect(row.columns[0].width).to eq(Anchorman::Column.new('longer than medium length').required_width)
+        expect(row.columns[1].width).to eq(Anchorman::Column.new('i am pretty long').required_width)
+        expect(row.columns[2].width).to eq(Anchorman::Column.new('longer than short', :padding => 100).required_width)
       end
     end
   end

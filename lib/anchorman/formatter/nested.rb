@@ -1,7 +1,7 @@
 require 'singleton'
 require 'colored'
 
-module CommandLineReporter
+module Anchorman
   class NestedFormatter
     include Singleton
     include OptionsValidator

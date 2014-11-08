@@ -1,4 +1,4 @@
-## Command Line Reporter [![Build Status](https://travis-ci.org/wbailey/command_line_reporter.png)](https://travis-ci.org/wbailey/command_line_reporter)  [![Code Climate](https://codeclimate.com/github/wbailey/command_line_reporter.png)](https://codeclimate.com/github/wbailey/command_line_reporter) [![Gem Version](https://badge.fury.io/rb/command_line_reporter.png)](http://badge.fury.io/rb/command_line_reporter)
+## Anchorman
 
 This gem provides a DSL that makes it easy to write reports of various types in ruby.  It eliminates
 the need to litter your source with *puts* statements, instead providing a more readable, expressive
@@ -21,13 +21,13 @@ supports it. Here is an example of output you can generate easily with "the repo
 It is up on rubygems.org so add it to your bundle in the Gemfile
 
 ```bash
-gem 'command_line_reporter', '>=3.0'
+gem 'anchorman', '>=1.0'
 ```
 
 or do it the old fashioned way:
 
 ```bash
-gem install command_line_reporter
+gem install anchorman
 ```
 
 ### Usage
@@ -35,17 +35,17 @@ gem install command_line_reporter
 The gem provides a mixin that can be included in your scripts.
 
 ```ruby
-require 'command_line_reporter'
+require 'anchorman'
 
 class MyReport
-  include CommandLineReporter
+  include Anchorman
   ...
 end
 ```
 
-### [Wiki](https://github.com/wbailey/command_line_reporter/wiki)
+### [Wiki](https://github.com/alb3rtuk/anchorman)
 
-The [Wiki](https://github.com/wbailey/command_line_reporter/wiki) has all of the documentation
+The [Wiki](https://github.com/alb3rtuk/anchorman) has all of the documentation
 necessary for getting you started.
 
 ### API Reference
@@ -132,7 +132,7 @@ There are several methods the mixin provides that do not depend on the formatter
 
 ### License
 
-Copyright (c) 2011-2014 Wes Bailey
+Copyright (c) 2011-2014 Albert Rannetsperger
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,

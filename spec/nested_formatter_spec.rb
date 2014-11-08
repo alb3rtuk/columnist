@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe CommandLineReporter::NestedFormatter do
-  subject { CommandLineReporter::NestedFormatter.instance }
+describe Anchorman::NestedFormatter do
+  subject { Anchorman::NestedFormatter.instance }
 
   let(:controls) do
     {

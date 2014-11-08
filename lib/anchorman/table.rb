@@ -1,4 +1,4 @@
-module CommandLineReporter
+module Anchorman
   class Table
     include OptionsValidator
 
@@ -11,7 +11,7 @@ module CommandLineReporter
       self.border = options[:border] || false
       self.border_color = options[:border_color] || false
       self.width = options[:width] || false
-      self.encoding = options[:encoding] || CommandLineReporter::DEFAULTS[:encoding]
+      self.encoding = options[:encoding] || Anchorman::DEFAULTS[:encoding]
 
       @rows = []
 

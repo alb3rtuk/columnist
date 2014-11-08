@@ -1,14 +1,13 @@
 require 'stringio'
 
-require 'command_line_reporter/options_validator'
-require 'command_line_reporter/formatter/progress'
-require 'command_line_reporter/formatter/nested'
-require 'command_line_reporter/row'
-require 'command_line_reporter/column'
-require 'command_line_reporter/table'
-require 'command_line_reporter/version'
+require 'anchorman/options_validator'
+require 'anchorman/formatter/progress'
+require 'anchorman/formatter/nested'
+require 'anchorman/row'
+require 'anchorman/column'
+require 'anchorman/table'
 
-module CommandLineReporter
+module Anchorman
   include OptionsValidator
 
   attr_reader :formatter
@@ -37,7 +36,7 @@ module CommandLineReporter
 
   def formatter=(type = 'nested')
     name = type.capitalize + 'Formatter'
-    klass = %W{CommandLineReporter #{name}}.inject(Kernel) {|s,c| s.const_get(c)}
+    klass = %W{Anchorman #{name}}.inject(Kernel) {|s,c| s.const_get(c)}
 
     # Each formatter is a singleton that responds to #instance
     @formatter = klass.instance
@@ -120,20 +119,20 @@ module CommandLineReporter
   end
 
   def table(options = {})
-    @table = CommandLineReporter::Table.new(options)
+    @table = Anchorman::Table.new(options)
     yield
     @table.output
   end
 
   def row(options = {})
     options[:encoding] ||= @table.encoding
-    @row = CommandLineReporter::Row.new(options)
+    @row = Anchorman::Row.new(options)
     yield
     @table.add(@row)
   end
 
   def column(text, options = {})
-    col = CommandLineReporter::Column.new(text, options)
+    col = Anchorman::Column.new(text, options)
     @row.add(col)
   end
 

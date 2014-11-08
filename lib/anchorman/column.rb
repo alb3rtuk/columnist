@@ -1,6 +1,6 @@
 require 'colored'
 
-module CommandLineReporter
+module Anchorman
   class Column
     include OptionsValidator
 

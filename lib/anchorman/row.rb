@@ -1,4 +1,4 @@
-module CommandLineReporter
+module Anchorman
   class Row
     include OptionsValidator
 

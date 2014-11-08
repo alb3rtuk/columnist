@@ -1,2 +1,4 @@
 pkg/*
 wiki
+.idea/
+.DS_Store

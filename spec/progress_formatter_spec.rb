@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe CommandLineReporter::ProgressFormatter do
-  subject { CommandLineReporter::ProgressFormatter.instance }
+describe Anchorman::ProgressFormatter do
+  subject { Anchorman::ProgressFormatter.instance }
 
   describe '#method default values' do
     describe '#indicator' do
