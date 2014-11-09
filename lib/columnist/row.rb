@@ -7,7 +7,6 @@ module Columnist
 
         def initialize(options = {})
             self.validate_options(options, *VALID_OPTIONS)
-
             self.columns = []
             self.border = false
             self.header = options[:header] || false
@@ -32,10 +31,8 @@ module Columnist
         def output
             screen_count.times do |sr|
                 border_char = use_utf8? ? "\u2503" : '|'
-                border_char = border_char.send(self.border_color) if self.border_color
-
+                border_char = colorize(border_char, self.border_color)
                 line = (self.border) ? "#{border_char} " : ''
-
                 self.columns.size.times do |mc|
                     col = self.columns[mc]
                     # Account for the fact that some columns will have more screen rows than their
@@ -62,10 +59,8 @@ module Columnist
                     else
                         line << self.columns[mc].screen_rows[sr]
                     end
-
                     line << ' ' + ((self.border) ? "#{border_char} " : '')
                 end
-
                 puts line
             end
         end
@@ -79,5 +74,37 @@ module Columnist
         def use_utf8?
             self.encoding == :unicode && "\u2501" != "u2501"
         end
+
+        def colorize(str, color)
+            case color
+                when 'red'
+                    return "\x1B[38;5;9m#{str}\x1B[38;5;256m"
+                when 'green'
+                    return "\x1B[38;5;10m#{str}\x1B[38;5;256m"
+                when 'yellow'
+                    return "\x1B[38;5;11m#{str}\x1B[38;5;256m"
+                when 'blue'
+                    return "\x1B[38;5;33m#{str}\x1B[38;5;256m"
+                when 'magenta'
+                    return "\x1B[38;5;13m#{str}\x1B[38;5;256m"
+                when 'cyan'
+                    return "\x1B[38;5;14m#{str}\x1B[38;5;256m"
+                when 'gray'
+                    return "\x1B[38;5;240m#{str}\x1B[38;5;256m"
+                when 'white'
+                    return "\x1B[38;5;255m#{str}\x1B[38;5;256m"
+                when 'black'
+                    return "\x1B[38;5;0m#{str}\x1B[38;5;256m"
+            end
+            if is_number?(color)
+                str = "\x1B[38;5;#{color}m#{str}\x1B[38;5;256m"
+            end
+            str
+        end
+
+        def is_number?(str)
+            true if Integer(str) rescue false
+        end
+
     end
 end
