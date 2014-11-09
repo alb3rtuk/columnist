@@ -5,9 +5,9 @@ The original gem, created by [Wes Bailey](https://github.com/wbailey), can be fo
 
 ## Columnist
 
-This gem provides a DSL that makes it easy to write reports of various types in ruby.  It eliminates
+This gem provides a DSL that makes it easy to write reports of various types in ruby. It eliminates
 the need to litter your source with `puts` statements, instead providing a more readable, expressive
-interface to your application.  Some of the best features include:
+interface to your application. Some of the best features include:
 
 * Formatters that automatically indicate progress
 * Table syntax similar to HTML that makes it trivial to format your data in rows and columns
@@ -69,10 +69,10 @@ There are several methods the mixin provides that do not depend on the formatter
   * The first argument is a hash that defines the options for the method. See the details in the
     formatter section for allowed values.
   * The second argument is a block of ruby code that you want executed within the context of the
-    reporter.  Any ruby code is allowed.  See the examples that follow in the formatter sections for
+    reporter. Any ruby code is allowed. See the examples that follow in the formatter sections for
     details.
 * **formatter=(string)**
-  * Factory method indicating the formatter you want your application to use.  At present the 2
+  * Factory method indicating the formatter you want your application to use. At present the 2
     formatters are (**Default: 'nested'**):
   * 'progress' - Use the progress formatter
   * 'nested' - Use the nested (or documentation) formatter
