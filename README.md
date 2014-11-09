@@ -1,13 +1,18 @@
+## Original
+
+The original gem, created by [Wes Bailey](https://github.com/wbailey), can be found here:
+[https://github.com/wbailey/command_line_reporter](https://github.com/wbailey/command_line_reporter)
+
 ## Columnist
 
 This gem provides a DSL that makes it easy to write reports of various types in ruby.  It eliminates
-the need to litter your source with *puts* statements, instead providing a more readable, expressive
+the need to litter your source with `puts` statements, instead providing a more readable, expressive
 interface to your application.  Some of the best features include:
 
 * Formatters that automatically indicate progress
 * Table syntax similar to HTML that makes it trivial to format your data in rows and columns
 * Easily created headers and footers for your report
-* Output suppression that makes it easy for your script to support a _quiet_ flag
+* Output suppression that makes it easy for your script to support a `quiet` flag
 * Capture report output as a string
 
 The latest release, thanks to a contribution from [Josh Brown](https://github.com/tobijb), allows you
@@ -18,13 +23,13 @@ supports it. Here is an example of output you can generate easily with "the repo
 
 ### Installation
 
-It is up on rubygems.org so add it to your bundle in the Gemfile
+It is up on rubygems.org so add it to your bundle in the Gemfile..
 
 ```bash
 gem 'columnist', '>=1.0'
 ```
 
-or do it the old fashioned way:
+Or do it the old fashioned way..
 
 ```bash
 gem install columnist
@@ -37,16 +42,11 @@ The gem provides a mixin that can be included in your scripts.
 ```ruby
 require 'columnist'
 
-class MyReport
+class YourClass
   include Columnist
   ...
 end
 ```
-
-### [Wiki](https://github.com/alb3rtuk/columnist)
-
-The [Wiki](https://github.com/alb3rtuk/columnist) has all of the documentation
-necessary for getting you started.
 
 ### API Reference
 
@@ -115,36 +115,14 @@ There are several methods the mixin provides that do not depend on the formatter
 * _capture_output_ - Captures all of the output stream to a string and restores output to STDOUT
 * _restore_output_ - Restores the output stream to STDOUT
 
-### To Do
-
-* Add a formatter that supports html output
-* Add the ability for a column to span across others in a table
-
 ### Contributors
 
+* [Wes Bailey](https://github.com/wbailey) the original creator
 * [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8
+* [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8* [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8
 * [Stefan Frank](https://github.com/mugwump) for raising the issue that he could not capture report
   output in a variable as a string
 * [Mike Gunderloy](https://github.com/ffmike) for suggesting the need for suppressing output and
   putting together a fantastic pull request and discussion
 * [Jason Rogers](https://github.com/jacaetevha) and [Peter Suschlik](https://github.com/splattael)
   for their contributions as well on items I missed
-
-### License
-
-Copyright (c) 2011-2014 Albert Rannetsperger
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-associated documentation files (the "Software"), to deal in the Software without restriction,
-including without limitation the rights to use, copy, modify, merge, publish, distribute,
-sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
-NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
-OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
