@@ -38,7 +38,7 @@ gem install columnist
 
 ### Usage
 
-The gem provides a mixin that can be included in your scripts.
+The gem provides a mixin that can be included in your script as follows:
 
 ```ruby
 require 'columnist'
@@ -48,6 +48,8 @@ class YourClass
   ...
 end
 ```
+
+The best way to get an idea of how it works is to look at an example program:
 
 ```ruby
 require 'columnist'
@@ -84,8 +86,15 @@ end
 Example.new.run
 ```
 
-![Screenshot](https://raw.githubusercontent.com/alb3rtuk/columnist/master/examples/screenshot-2.png)
+The above code will output the following result:
 
+![Screenshot](https://raw.githubusercontent.com/alb3rtuk/columnist/master/examples/screenshot-3.png)
+
+### Color Reference
+
+**Columnist** has 256-color support! Use the chart below for reference.
+
+![Screenshot](https://raw.githubusercontent.com/alb3rtuk/columnist/master/examples/screenshot-2.png)
 
 ### API Reference
 
