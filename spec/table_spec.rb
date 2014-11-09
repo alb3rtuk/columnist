@@ -1,67 +1,67 @@
 require 'spec_helper'
 
-describe Anchorman::Table do
+describe Columnist::Table do
   context 'creation' do
     it 'defaults options hash' do
       expect {
-        Anchorman::Table.new
+        Columnist::Table.new
       }.to_not raise_error
     end
 
     it 'defaults the border' do
-      expect(Anchorman::Table.new.border).to be_false
+      expect(Columnist::Table.new.border).to be_false
     end
 
     it 'accepts the border' do
-      expect(Anchorman::Table.new(:border => true).border).to eq(true)
+      expect(Columnist::Table.new(:border => true).border).to eq(true)
     end
 
     it 'defaults the border_color' do
-      expect(Anchorman::Table.new.border_color).to be_false
+      expect(Columnist::Table.new.border_color).to be_false
     end
 
     it 'accepts the border_color' do
-      expect(Anchorman::Table.new(:border_color => true).border_color).to eq(true)
+      expect(Columnist::Table.new(:border_color => true).border_color).to eq(true)
     end
 
     it 'output encoding should be ascii' do
-      expect(Anchorman::Table.new(:encoding => :ascii).encoding).to eq(:ascii)
+      expect(Columnist::Table.new(:encoding => :ascii).encoding).to eq(:ascii)
     end
 
     it 'output encoding should be unicode' do
-      expect(Anchorman::Table.new.encoding).to eq(:unicode)
+      expect(Columnist::Table.new.encoding).to eq(:unicode)
     end
   end
 
   context 'rows' do
     it 'allows addition' do
-      cols = [Anchorman::Column.new('test1'), Anchorman::Column.new('test2')]
-      row = Anchorman::Row.new
+      cols = [Columnist::Column.new('test1'), Columnist::Column.new('test2')]
+      row = Columnist::Row.new
       cols.each {|c| row.add(c)}
       expect {
-        Anchorman::Table.new.add(row)
+        Columnist::Table.new.add(row)
       }.to_not raise_error
     end
 
     context 'inherits' do
       before :each do
-        @table = Anchorman::Table.new
-        row = Anchorman::Row.new(:color => 'red')
+        @table = Columnist::Table.new
+        row = Columnist::Row.new(:color => 'red')
         (
           @cols1 = [
-            Anchorman::Column.new('asdf', :width => 5),
-            Anchorman::Column.new('qwer', :align => 'right', :color => 'purple'),
-            Anchorman::Column.new('tutu', :color => 'green'),
-            Anchorman::Column.new('uiui', :bold => true),
+            Columnist::Column.new('asdf', :width => 5),
+            Columnist::Column.new('qwer', :align => 'right', :color => 'purple'),
+            Columnist::Column.new('tutu', :color => 'green'),
+            Columnist::Column.new('uiui', :bold => true),
           ]
         ).each {|c| row.add(c)}
         @table.add(row)
-        row = Anchorman::Row.new
+        row = Columnist::Row.new
         (@cols2 = [
-            Anchorman::Column.new('test'),
-            Anchorman::Column.new('test'),
-            Anchorman::Column.new('test', :color => 'blue'),
-            Anchorman::Column.new('test'),
+            Columnist::Column.new('test'),
+            Columnist::Column.new('test'),
+            Columnist::Column.new('test', :color => 'blue'),
+            Columnist::Column.new('test'),
           ]
         ).each {|c| row.add(c)}
         @table.add(row)
@@ -93,11 +93,11 @@ describe Anchorman::Table do
 
       context 'with header row' do
         before :each do
-          @table = Anchorman::Table.new
-          row = Anchorman::Row.new(:header => true)
+          @table = Columnist::Table.new
+          row = Columnist::Row.new(:header => true)
           @cols1.each {|c| row.add(c)}
           @table.add(row)
-          row = Anchorman::Row.new
+          row = Columnist::Row.new
           @cols2.each {|c| row.add(c)}
           @table.add(row)
         end
@@ -123,20 +123,20 @@ describe Anchorman::Table do
   
   describe '#auto_adjust_widths' do
     it 'sets the widths of each column in each row to the maximum required width for that column' do
-      table = Anchorman::Table.new.tap do |t|
+      table = Columnist::Table.new.tap do |t|
         t.add(
-          Anchorman::Row.new.tap do |r|
-            r.add Anchorman::Column.new('medium length')
-            r.add Anchorman::Column.new('i am pretty long') # longest column
-            r.add Anchorman::Column.new('short', :padding => 100)
+          Columnist::Row.new.tap do |r|
+            r.add Columnist::Column.new('medium length')
+            r.add Columnist::Column.new('i am pretty long') # longest column
+            r.add Columnist::Column.new('short', :padding => 100)
           end
         )
 
         t.add(
-          Anchorman::Row.new.tap do |r|
-            r.add Anchorman::Column.new('longer than medium length') # longest column
-            r.add Anchorman::Column.new('shorter')
-            r.add Anchorman::Column.new('longer than short') # longest column (inherits padding)
+          Columnist::Row.new.tap do |r|
+            r.add Columnist::Column.new('longer than medium length') # longest column
+            r.add Columnist::Column.new('shorter')
+            r.add Columnist::Column.new('longer than short') # longest column (inherits padding)
           end
         )
       end
@@ -144,9 +144,9 @@ describe Anchorman::Table do
       table.auto_adjust_widths
 
       table.rows.each do |row|
-        expect(row.columns[0].width).to eq(Anchorman::Column.new('longer than medium length').required_width)
-        expect(row.columns[1].width).to eq(Anchorman::Column.new('i am pretty long').required_width)
-        expect(row.columns[2].width).to eq(Anchorman::Column.new('longer than short', :padding => 100).required_width)
+        expect(row.columns[0].width).to eq(Columnist::Column.new('longer than medium length').required_width)
+        expect(row.columns[1].width).to eq(Columnist::Column.new('i am pretty long').required_width)
+        expect(row.columns[2].width).to eq(Columnist::Column.new('longer than short', :padding => 100).required_width)
       end
     end
   end

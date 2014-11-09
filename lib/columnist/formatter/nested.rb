@@ -1,7 +1,7 @@
 require 'singleton'
 require 'colored'
 
-module Anchorman
+module Columnist
   class NestedFormatter
     include Singleton
     include OptionsValidator

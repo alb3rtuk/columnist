@@ -1,6 +1,6 @@
 require 'colored'
 
-module Anchorman
+module Columnist
     class Column
         include OptionsValidator
 
@@ -68,26 +68,26 @@ module Anchorman
             str = str.send('bold') if self.bold
             case self.color
                 when 'red'
-                    return "\x1B[38;5;9m#{str}\x1B[0m"
+                    return "\x1B[38;5;9m#{str}\x1B[38;5;256m"
                 when 'green'
-                    return "\x1B[38;5;10m#{str}\x1B[0m"
+                    return "\x1B[38;5;10m#{str}\x1B[38;5;256m"
                 when 'yellow'
-                    return "\x1B[38;5;11m#{str}\x1B[0m"
+                    return "\x1B[38;5;11m#{str}\x1B[38;5;256m"
                 when 'blue'
-                    return "\x1B[38;5;33m#{str}\x1B[0m"
+                    return "\x1B[38;5;33m#{str}\x1B[38;5;256m"
                 when 'magenta'
-                    return "\x1B[38;5;13m#{str}\x1B[0m"
+                    return "\x1B[38;5;13m#{str}\x1B[38;5;256m"
                 when 'cyan'
-                    return "\x1B[38;5;14m#{str}\x1B[0m"
+                    return "\x1B[38;5;14m#{str}\x1B[38;5;256m"
                 when 'gray'
-                    return "\x1B[38;5;240m#{str}\x1B[0m"
+                    return "\x1B[38;5;240m#{str}\x1B[38;5;256m"
                 when 'white'
-                    return "\x1B[38;5;255m#{str}\x1B[0m"
+                    return "\x1B[38;5;255m#{str}\x1B[38;5;256m"
                 when 'black'
-                    return "\x1B[38;5;0m#{str}\x1B[0m"
+                    return "\x1B[38;5;0m#{str}\x1B[38;5;256m"
             end
             if is_number?(self.color)
-                str = "\x1B[38;5;#{self.color}m#{str}\x1B[0m"
+                str = "\x1B[38;5;#{self.color}m#{str}\x1B[38;5;256m"
             end
             str
         end

@@ -1,4 +1,4 @@
-## Anchorman
+## Columnist
 
 This gem provides a DSL that makes it easy to write reports of various types in ruby.  It eliminates
 the need to litter your source with *puts* statements, instead providing a more readable, expressive
@@ -21,13 +21,13 @@ supports it. Here is an example of output you can generate easily with "the repo
 It is up on rubygems.org so add it to your bundle in the Gemfile
 
 ```bash
-gem 'anchorman', '>=1.0'
+gem 'columnist', '>=1.0'
 ```
 
 or do it the old fashioned way:
 
 ```bash
-gem install anchorman
+gem install columnist
 ```
 
 ### Usage
@@ -35,17 +35,17 @@ gem install anchorman
 The gem provides a mixin that can be included in your scripts.
 
 ```ruby
-require 'anchorman'
+require 'columnist'
 
 class MyReport
-  include Anchorman
+  include Columnist
   ...
 end
 ```
 
-### [Wiki](https://github.com/alb3rtuk/anchorman)
+### [Wiki](https://github.com/alb3rtuk/columnist)
 
-The [Wiki](https://github.com/alb3rtuk/anchorman) has all of the documentation
+The [Wiki](https://github.com/alb3rtuk/columnist) has all of the documentation
 necessary for getting you started.
 
 ### API Reference

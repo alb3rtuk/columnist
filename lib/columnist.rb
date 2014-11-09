@@ -1,13 +1,13 @@
 require 'stringio'
 
-require 'anchorman/options_validator'
-require 'anchorman/formatter/progress'
-require 'anchorman/formatter/nested'
-require 'anchorman/row'
-require 'anchorman/column'
-require 'anchorman/table'
+require 'columnist/options_validator'
+require 'columnist/formatter/progress'
+require 'columnist/formatter/nested'
+require 'columnist/row'
+require 'columnist/column'
+require 'columnist/table'
 
-module Anchorman
+module Columnist
   include OptionsValidator
 
   attr_reader :formatter
@@ -36,7 +36,7 @@ module Anchorman
 
   def formatter=(type = 'nested')
     name = type.capitalize + 'Formatter'
-    klass = %W{Anchorman #{name}}.inject(Kernel) {|s,c| s.const_get(c)}
+    klass = %W{Columnist #{name}}.inject(Kernel) {|s,c| s.const_get(c)}
 
     # Each formatter is a singleton that responds to #instance
     @formatter = klass.instance
@@ -119,20 +119,20 @@ module Anchorman
   end
 
   def table(options = {})
-    @table = Anchorman::Table.new(options)
+    @table = Columnist::Table.new(options)
     yield
     @table.output
   end
 
   def row(options = {})
     options[:encoding] ||= @table.encoding
-    @row = Anchorman::Row.new(options)
+    @row = Columnist::Row.new(options)
     yield
     @table.add(@row)
   end
 
   def column(text, options = {})
-    col = Anchorman::Column.new(text, options)
+    col = Columnist::Column.new(text, options)
     @row.add(col)
   end
 

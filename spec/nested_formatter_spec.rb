@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Anchorman::NestedFormatter do
-  subject { Anchorman::NestedFormatter.instance }
+describe Columnist::NestedFormatter do
+  subject { Columnist::NestedFormatter.instance }
 
   let(:controls) do
     {

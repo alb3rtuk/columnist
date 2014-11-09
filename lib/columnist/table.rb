@@ -1,4 +1,4 @@
-module Anchorman
+module Columnist
     class Table
         include OptionsValidator
 
@@ -11,7 +11,7 @@ module Anchorman
             self.border = options[:border] || false
             self.border_color = options[:border_color] || false
             self.width = options[:width] || false
-            self.encoding = options[:encoding] || Anchorman::DEFAULTS[:encoding]
+            self.encoding = options[:encoding] || Columnist::DEFAULTS[:encoding]
 
             @rows = []
 

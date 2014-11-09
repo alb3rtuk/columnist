@@ -1,7 +1,7 @@
 require 'singleton'
 require 'colored'
 
-module Anchorman
+module Columnist
   class ProgressFormatter
     include Singleton
     include OptionsValidator

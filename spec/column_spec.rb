@@ -1,73 +1,73 @@
 require 'spec_helper'
 
-describe Anchorman::Column do
+describe Columnist::Column do
   describe '#initialize' do
     it 'rejects invalid options' do
       expect {
-        Anchorman::Column.new('test', :asdf => '1234')
+        Columnist::Column.new('test', :asdf => '1234')
       }.to raise_error ArgumentError
     end
 
     it 'defaults options hash' do
       expect {
-        Anchorman::Column.new('test')
+        Columnist::Column.new('test')
       }.to_not raise_error
     end
 
     it 'defaults the width' do
-      expect(Anchorman::Column.new('test').width).to eq(10)
+      expect(Columnist::Column.new('test').width).to eq(10)
     end
 
     it 'accepts the width' do
-      expect(Anchorman::Column.new('test', :width => 50).width).to eq(50)
+      expect(Columnist::Column.new('test', :width => 50).width).to eq(50)
     end
 
     it 'requires valid width' do
       expect {
-        Anchorman::Column.new('test', :width => 'asdf')
+        Columnist::Column.new('test', :width => 'asdf')
       }.to raise_error ArgumentError
     end
 
     it 'accepts text' do
-      expect(Anchorman::Column.new('asdf').text).to eq('asdf')
+      expect(Columnist::Column.new('asdf').text).to eq('asdf')
     end
 
     it 'accepts color' do
-      expect(Anchorman::Column.new('asdf', :color => 'red').color).to eq('red')
+      expect(Columnist::Column.new('asdf', :color => 'red').color).to eq('red')
     end
 
     it 'accepts bold' do
-      expect(Anchorman::Column.new('asdf', :bold => true).bold).to be_true
+      expect(Columnist::Column.new('asdf', :bold => true).bold).to be_true
     end
 
     it 'defaults the padding' do
-      expect(Anchorman::Column.new('test').padding).to eq(0)
+      expect(Columnist::Column.new('test').padding).to eq(0)
     end
 
     it 'accepts the padding' do
-      expect(Anchorman::Column.new('test', :padding => 5).padding).to eq(5)
+      expect(Columnist::Column.new('test', :padding => 5).padding).to eq(5)
     end
 
     it 'requires valid width' do
       expect {
-        Anchorman::Column.new('test', :padding => 'asdf')
+        Columnist::Column.new('test', :padding => 'asdf')
       }.to raise_error ArgumentError
     end
   end
 
   describe '#size' do
     it 'is the width less twice the padding' do
-      expect(Anchorman::Column.new('test').size).to eq(10)
-      expect(Anchorman::Column.new('test', :width => 5).size).to eq(5)
-      expect(Anchorman::Column.new('test', :width => 5, :padding => 1).size).to eq(3)
+      expect(Columnist::Column.new('test').size).to eq(10)
+      expect(Columnist::Column.new('test', :width => 5).size).to eq(5)
+      expect(Columnist::Column.new('test', :width => 5, :padding => 1).size).to eq(3)
     end
   end
 
   describe '#required_width' do
     it 'is the length of the text plus twice the padding' do
-      expect(Anchorman::Column.new('test').required_width).to eq(4)
-      expect(Anchorman::Column.new('test', :padding => 1).required_width).to eq(6)
-      expect(Anchorman::Column.new('test', :padding => 5).required_width).to eq(14)
+      expect(Columnist::Column.new('test').required_width).to eq(4)
+      expect(Columnist::Column.new('test', :padding => 1).required_width).to eq(6)
+      expect(Columnist::Column.new('test', :padding => 5).required_width).to eq(14)
     end
   end
 
@@ -83,12 +83,12 @@ describe Anchorman::Column do
     context 'no wrapping' do
       context 'no padding' do
         it 'gives a single row' do
-          c = Anchorman::Column.new('x' * 5)
+          c = Columnist::Column.new('x' * 5)
           c.screen_rows.size == 1
         end
 
         it 'handles empty text' do
-          c = Anchorman::Column.new
+          c = Columnist::Column.new
           expect(c.screen_rows[0]).to eq(' ' * 10)
         end
 
@@ -97,17 +97,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 10 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :width => 20)
+            c = Columnist::Column.new(text, :width => 20)
             expect(c.screen_rows[0]).to eq(text + filler)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'left', :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'left', :width => 20, :color => 'red')
             expect(c.screen_rows[0]).to eq(controls[:red] + text + filler + controls[:clear])
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'left', :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :align => 'left', :width => 20, :bold => true)
             expect(c.screen_rows[0]).to eq(controls[:bold] + text + filler + controls[:clear])
           end
         end
@@ -117,17 +117,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 10 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 20)
+            c = Columnist::Column.new(text, :align => 'right', :width => 20)
             expect(c.screen_rows[0]).to eq(filler + text)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'right', :width => 20, :color => 'red')
             expect(c.screen_rows[0]).to eq(controls[:red] + filler + text  + controls[:clear])
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :align => 'right', :width => 20, :bold => true)
             expect(c.screen_rows[0]).to eq(controls[:bold] + filler + text + controls[:clear])
           end
         end
@@ -137,17 +137,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 5 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 20)
+            c = Columnist::Column.new(text, :align => 'center', :width => 20)
             expect(c.screen_rows[0]).to eq(filler + text + filler)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'center', :width => 20, :color => 'red')
             expect(c.screen_rows[0]).to eq(controls[:red] + filler + text + filler + controls[:clear])
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :align => 'center', :width => 20, :bold => true)
             expect(c.screen_rows[0]).to eq(controls[:bold] + filler + text + filler + controls[:clear])
           end
         end
@@ -160,17 +160,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 10 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :padding => 5, :width => 30)
+            c = Columnist::Column.new(text, :padding => 5, :width => 30)
             expect(c.screen_rows[0]).to eq(padding + text + filler + padding)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :padding => 5, :width => 30, :color => 'red')
+            c = Columnist::Column.new(text, :padding => 5, :width => 30, :color => 'red')
             expect(c.screen_rows[0]).to eq(padding + controls[:red] + text + filler + controls[:clear] + padding)
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :padding => 5, :width => 30, :bold => true)
+            c = Columnist::Column.new(text, :padding => 5, :width => 30, :bold => true)
             expect(c.screen_rows[0]).to eq(padding + controls[:bold] + text + filler + controls[:clear] + padding)
           end
         end
@@ -181,17 +181,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 10 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'right', :padding => 5, :width => 30)
+            c = Columnist::Column.new(text, :align => 'right', :padding => 5, :width => 30)
             expect(c.screen_rows[0]).to eq(padding + filler + text + padding)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'right', :padding => 5, :width => 30, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'right', :padding => 5, :width => 30, :color => 'red')
             expect(c.screen_rows[0]).to eq(padding + controls[:red] + filler + text + controls[:clear] + padding)
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'right', :padding => 5, :width => 30, :bold => true)
+            c = Columnist::Column.new(text, :align => 'right', :padding => 5, :width => 30, :bold => true)
             expect(c.screen_rows[0]).to eq(padding + controls[:bold] + filler + text + controls[:clear] + padding)
           end
         end
@@ -202,17 +202,17 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 5 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'center', :padding => 5, :width => 30)
+            c = Columnist::Column.new(text, :align => 'center', :padding => 5, :width => 30)
             expect(c.screen_rows[0]).to eq(padding + filler + text + filler + padding)
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'center', :padding => 5, :width => 30, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'center', :padding => 5, :width => 30, :color => 'red')
             expect(c.screen_rows[0]).to eq(padding + controls[:red] + filler + text + filler + controls[:clear] + padding)
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'center', :padding => 5, :width => 30, :bold => true)
+            c = Columnist::Column.new(text, :align => 'center', :padding => 5, :width => 30, :bold => true)
             expect(c.screen_rows[0]).to eq(padding + controls[:bold] + filler + text + filler + controls[:clear] + padding)
           end
         end
@@ -228,12 +228,12 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 5 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :width => 10)
+            c = Columnist::Column.new(text, :width => 10)
             expect(c.screen_rows).to eq([full_line, full_line, remainder + filler])
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :width => 10, :color => 'red')
+            c = Columnist::Column.new(text, :width => 10, :color => 'red')
             expect(c.screen_rows).to eq([
               controls[:red] + full_line + controls[:clear],
               controls[:red] + full_line + controls[:clear],
@@ -242,7 +242,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :width => 10, :bold => true)
+            c = Columnist::Column.new(text, :width => 10, :bold => true)
             expect(c.screen_rows).to eq([
               controls[:bold] + full_line + controls[:clear],
               controls[:bold] + full_line + controls[:clear],
@@ -258,12 +258,12 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 5 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 10)
+            c = Columnist::Column.new(text, :align => 'right', :width => 10)
             expect(c.screen_rows).to eq([full_line, full_line, filler + remainder])
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 10, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'right', :width => 10, :color => 'red')
             expect(c.screen_rows).to eq([
               controls[:red] + full_line + controls[:clear],
               controls[:red] + full_line + controls[:clear],
@@ -272,7 +272,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'right', :width => 10, :bold => true)
+            c = Columnist::Column.new(text, :align => 'right', :width => 10, :bold => true)
             expect(c.screen_rows).to eq([
               controls[:bold] + full_line + controls[:clear],
               controls[:bold] + full_line + controls[:clear],
@@ -289,12 +289,12 @@ describe Anchorman::Column do
           let(:right_filler) { ' ' * 2 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 10)
+            c = Columnist::Column.new(text, :align => 'center', :width => 10)
             expect(c.screen_rows).to eq([full_line, full_line, ' ' * 3 + remainder + right_filler])
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 10, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'center', :width => 10, :color => 'red')
             expect(c.screen_rows).to eq([
               controls[:red] + full_line + controls[:clear],
               controls[:red] + full_line + controls[:clear],
@@ -303,7 +303,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'center', :width => 10, :bold => true)
+            c = Columnist::Column.new(text, :align => 'center', :width => 10, :bold => true)
             expect(c.screen_rows).to eq([
               controls[:bold] + full_line + controls[:clear],
               controls[:bold] + full_line + controls[:clear],
@@ -322,7 +322,7 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 7 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :padding => 2, :width => 20)
+            c = Columnist::Column.new(text, :padding => 2, :width => 20)
             expect(c.screen_rows).to eq([
               padding + full_line + padding,
               padding + remainder + filler + padding,
@@ -330,7 +330,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :padding => 2, :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :padding => 2, :width => 20, :color => 'red')
             expect(c.screen_rows).to eq([
               padding + controls[:red] + full_line + controls[:clear] + padding,
               padding + controls[:red] + remainder + filler + controls[:clear] + padding,
@@ -338,7 +338,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :padding => 2, :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :padding => 2, :width => 20, :bold => true)
             expect(c.screen_rows).to eq([
               padding + controls[:bold] + full_line + controls[:clear] + padding,
               padding + controls[:bold] + remainder + filler + controls[:clear] + padding,
@@ -354,7 +354,7 @@ describe Anchorman::Column do
           let(:filler) { ' ' * 7 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :padding => 2, :align => 'right', :width => 20)
+            c = Columnist::Column.new(text, :padding => 2, :align => 'right', :width => 20)
             expect(c.screen_rows).to eq([
               padding + full_line + padding,
               padding + filler + remainder + padding,
@@ -362,7 +362,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :align => 'right', :padding => 2, :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :align => 'right', :padding => 2, :width => 20, :color => 'red')
             expect(c.screen_rows).to eq([
               padding + controls[:red] + full_line + controls[:clear] + padding,
               padding + controls[:red] + filler + remainder + controls[:clear] + padding,
@@ -370,7 +370,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :align => 'right', :padding => 2, :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :align => 'right', :padding => 2, :width => 20, :bold => true)
             expect(c.screen_rows).to eq([
               padding + controls[:bold] + full_line + controls[:clear] + padding,
               padding + controls[:bold] + filler + remainder + controls[:clear] + padding,
@@ -387,7 +387,7 @@ describe Anchorman::Column do
           let(:right_filler) { ' ' * 3 }
 
           it 'plain text' do
-            c = Anchorman::Column.new(text, :padding => 2, :align => 'center', :width => 20)
+            c = Columnist::Column.new(text, :padding => 2, :align => 'center', :width => 20)
             expect(c.screen_rows).to eq([
               padding + full_line + padding,
               padding + left_filler + remainder + right_filler + padding,
@@ -395,7 +395,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs red' do
-            c = Anchorman::Column.new(text, :padding => 2, :align => 'center', :width => 20, :color => 'red')
+            c = Columnist::Column.new(text, :padding => 2, :align => 'center', :width => 20, :color => 'red')
             expect(c.screen_rows).to eq([
               padding + controls[:red] + full_line + controls[:clear] + padding,
               padding + controls[:red] + left_filler + remainder + right_filler + controls[:clear] + padding,
@@ -403,7 +403,7 @@ describe Anchorman::Column do
           end
 
           it 'outputs bold' do
-            c = Anchorman::Column.new(text, :padding => 2, :align => 'center', :width => 20, :bold => true)
+            c = Columnist::Column.new(text, :padding => 2, :align => 'center', :width => 20, :bold => true)
             expect(c.screen_rows).to eq([
               padding + controls[:bold] + full_line + controls[:clear] + padding,
               padding + controls[:bold] + left_filler + remainder + right_filler + controls[:clear] + padding,

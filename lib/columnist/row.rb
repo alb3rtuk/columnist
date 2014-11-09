@@ -1,4 +1,4 @@
-module Anchorman
+module Columnist
     class Row
         include OptionsValidator
 

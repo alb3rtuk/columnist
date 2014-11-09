@@ -1,33 +1,33 @@
 require 'spec_helper'
 
-describe Anchorman::Row do
-  let(:cols) { 10.times.map {|v| Anchorman::Column.new("test#{v}")} }
+describe Columnist::Row do
+  let(:cols) { 10.times.map {|v| Columnist::Column.new("test#{v}")} }
 
   describe '#initialize' do
     it 'accepts header' do
-      expect(Anchorman::Row.new(:header => true).header).to be_true
+      expect(Columnist::Row.new(:header => true).header).to be_true
     end
 
     it 'accepts color' do
-      expect(Anchorman::Row.new(:color => 'red').color).to eq('red')
+      expect(Columnist::Row.new(:color => 'red').color).to eq('red')
     end
 
     it 'accepts bold' do
-      expect(Anchorman::Row.new(:bold => true).bold).to be_true
+      expect(Columnist::Row.new(:bold => true).bold).to be_true
     end
 
     it 'output encoding should be ascii' do
-      expect(Anchorman::Row.new(:encoding => :ascii).encoding).to eq(:ascii)
+      expect(Columnist::Row.new(:encoding => :ascii).encoding).to eq(:ascii)
     end
 
     it 'output encoding should be unicode' do
-      expect(Anchorman::Row.new.encoding).to eq(:unicode)
+      expect(Columnist::Row.new.encoding).to eq(:unicode)
     end
 
   end
 
   describe '#add' do
-    subject { Anchorman::Row.new }
+    subject { Columnist::Row.new }
 
     it 'columns' do
       subject.add(cols[0])
@@ -38,7 +38,7 @@ describe Anchorman::Row do
     end
 
     it 'defaults colors on columns' do
-      row = Anchorman::Row.new(:color => 'red')
+      row = Columnist::Row.new(:color => 'red')
       row.add(cols[0])
       expect(row.columns[0].color).to eq('red')
       row.add(cols[1])
@@ -46,14 +46,14 @@ describe Anchorman::Row do
     end
 
     it 'allows columns to override the row color' do
-      col = Anchorman::Column.new('test', :color => 'blue')
-      row = Anchorman::Row.new(:color => 'red')
+      col = Columnist::Column.new('test', :color => 'blue')
+      row = Columnist::Row.new(:color => 'red')
       row.add(col)
       expect(row.columns[0].color).to eq('blue')
     end
 
     it 'supercedes bold on columns' do
-      row = Anchorman::Row.new(:bold => true)
+      row = Columnist::Row.new(:bold => true)
       row.add(cols[0])
       expect(row.columns[0].bold).to be_true
       row.add(cols[1])
@@ -64,12 +64,12 @@ describe Anchorman::Row do
   describe '#output' do
     let :cols do
       [
-        Anchorman::Column.new('asdf'),
-        Anchorman::Column.new('qwer', :align => 'center'),
-        Anchorman::Column.new('zxcv', :align => 'right'),
-        Anchorman::Column.new('x' * 25, :align => 'left', :width => 10),
-        Anchorman::Column.new('x' * 25, :align => 'center', :width => 10),
-        Anchorman::Column.new('x' * 35, :align => 'left', :width => 10),
+        Columnist::Column.new('asdf'),
+        Columnist::Column.new('qwer', :align => 'center'),
+        Columnist::Column.new('zxcv', :align => 'right'),
+        Columnist::Column.new('x' * 25, :align => 'left', :width => 10),
+        Columnist::Column.new('x' * 25, :align => 'center', :width => 10),
+        Columnist::Column.new('x' * 35, :align => 'left', :width => 10),
       ]
     end
 

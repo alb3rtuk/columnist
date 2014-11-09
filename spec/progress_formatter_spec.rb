@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Anchorman::ProgressFormatter do
-  subject { Anchorman::ProgressFormatter.instance }
+describe Columnist::ProgressFormatter do
+  subject { Columnist::ProgressFormatter.instance }
 
   describe '#method default values' do
     describe '#indicator' do
