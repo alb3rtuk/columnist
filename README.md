@@ -15,9 +15,8 @@ interface to your application.  Some of the best features include:
 * Output suppression that makes it easy for your script to support a `quiet` flag
 * Capture report output as a string
 
-The latest release, thanks to a contribution from [Josh Brown](https://github.com/tobijb), allows you
-to choose between UTF8 or ASCII for drawing tables.  By default it will use UTF8 if your system
-supports it. Here is an example of output you can generate easily with "the reporter":
+The latest release allows you to choose between UTF8 or ASCII for drawing tables. By default it will
+use UTF8 if your system supports it. Here is an example of output you can generate easily with **Columnist**:
 
 ![Screenshot](https://raw.githubusercontent.com/alb3rtuk/columnist/master/examples/screenshot-1.png)
 
