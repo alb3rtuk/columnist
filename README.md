@@ -1,8 +1,3 @@
-## Original
-
-The original gem, created by [Wes Bailey](https://github.com/wbailey), can be found here:
-[https://github.com/wbailey/command_line_reporter](https://github.com/wbailey/command_line_reporter)
-
 ## Columnist
 
 This gem provides a DSL that makes it easy to write reports of various types in ruby. It eliminates
@@ -163,14 +158,7 @@ There are several methods the mixin provides that do not depend on the formatter
 * **capture_output** - Captures all of the output stream to a string and restores output to STDOUT
 * **restore_output** - Restores the output stream to STDOUT
 
-### Contributors
+## Original
 
-* [Wes Bailey](https://github.com/wbailey) the original creator
-* [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8
-* [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8* [Josh Brown](https://github.com/tobijb) added the ability to encode tables in either ascii or utf8
-* [Stefan Frank](https://github.com/mugwump) for raising the issue that he could not capture report
-  output in a variable as a string
-* [Mike Gunderloy](https://github.com/ffmike) for suggesting the need for suppressing output and
-  putting together a fantastic pull request and discussion
-* [Jason Rogers](https://github.com/jacaetevha) and [Peter Suschlik](https://github.com/splattael)
-  for their contributions as well on items I missed
+The original gem, created by [Wes Bailey](https://github.com/wbailey), can be found here:
+[https://github.com/wbailey/command_line_reporter](https://github.com/wbailey/command_line_reporter)
