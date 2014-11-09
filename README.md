@@ -52,68 +52,68 @@ end
 
 There are several methods the mixin provides that do not depend on the formatter used:
 
-* **header(hash) **and **footer(hash) **
-  * **:title ** - The title text for the section.  **Default: 'Report' **
-  * **:width ** - The width in characters for the section.  **Default: 100 **
-  * **:align ** - 'left'|'right'|'center' align the title text.  **Default: 'left' **
-  * **:spacing ** - Number of vertical lines to leave as spacing after|before the header|footer.
-    **Default: 1 **
-  * **:timestamp ** - Include a line indicating the timestamp below|above the header|footer text.
-    Either true|false.  **Default: false **
-  * **:rule ** - true|false indicates whether to include a horizontal rule below|above the
-    header|footer.  **Default: false **
-  * **:color ** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
-  * **:bold ** - true|false to boldface the font
-* **report(hash) {block} **
+* **header(hash)** and **footer(hash)**
+  * **:title** - The title text for the section. **Default: 'Report'**
+  * **:width** - The width in characters for the section. **Default: 100**
+  * **:align** - 'left'|'right'|'center' align the title text. **Default: 'left'**
+  * **:spacing** - Number of vertical lines to leave as spacing after|before the header|footer.
+   **Default: 1**
+  * **:timestamp** - Include a line indicating the timestamp below|above the header|footer text.
+    Either true|false. **Default: false**
+  * **:rule** - true|false indicates whether to include a horizontal rule below|above the
+    header|footer. **Default: false**
+  * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
+  * **:bold** - true|false to boldface the font
+* **report(hash) {block}**
   * The first argument is a hash that defines the options for the method. See the details in the
     formatter section for allowed values.
   * The second argument is a block of ruby code that you want executed within the context of the
     reporter.  Any ruby code is allowed.  See the examples that follow in the formatter sections for
     details.
-* **formatter=(string) **
+* **formatter=(string)**
   * Factory method indicating the formatter you want your application to use.  At present the 2
-    formatters are ( **Default: 'nested' **):
+    formatters are (**Default: 'nested'**):
   * 'progress' - Use the progress formatter
   * 'nested' - Use the nested (or documentation) formatter
-* **horizontal **rule(hash) **
-  * **:char ** - The character used to build the rule.  **Default: '-' **
-  * **:width ** - The width in characters of the rule.  **Default: 100 **
-  * **:color ** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
-  * **:bold ** - true|false to boldface the font
-* **vertical **spacing(int) **
-  * Number of blank lines to output.  **Default: 1 **
-* **datetime(hash) **
-  * **:align ** - 'left'|'center'|'right' alignment of the timestamp.  **Default: 'left' **
-  * **:width ** - The width of the string in characters.  **Default: 100 **
-  * **:format ** - Any allowed format from #strftime#.  **Default: %Y-%m-%d %H:%I:%S%p **
-  * **:color ** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
-  * **:bold ** - true|false to boldface the font
-* **aligned(string, hash) **
-  * **text ** - String to display
-  * **:align ** - 'left'|'right'|'center' align the string text.  **Default: 'left' **
-  * **:width ** - The width in characters of the string text.  **Default: 100 **
-  * **:color ** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
-  * **:bold ** - true|false to boldface the font
-* **table(hash) {block} **
+* **horizontal**rule(hash)**
+  * **:char** - The character used to build the rule. **Default: '-'**
+  * **:width** - The width in characters of the rule. **Default: 100**
+  * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
+  * **:bold** - true|false to boldface the font
+* **vertical**spacing(int)**
+  * Number of blank lines to output. **Default: 1**
+* **datetime(hash)**
+  * **:align** - 'left'|'center'|'right' alignment of the timestamp. **Default: 'left'**
+  * **:width** - The width of the string in characters. **Default: 100**
+  * **:format** - Any allowed format from #strftime#. **Default: %Y-%m-%d %H:%I:%S%p**
+  * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
+  * **:bold** - true|false to boldface the font
+* **aligned(string, hash)**
+  * **text** - String to display
+  * **:align** - 'left'|'right'|'center' align the string text. **Default: 'left'**
+  * **:width** - The width in characters of the string text. **Default: 100**
+  * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
+  * **:bold** - true|false to boldface the font
+* **table(hash) {block}**
   * The first argument is a hash that defines properties of the table.
-    * **:border ** - true|false indicates whether to include borders around the table cells
-    * **:encoding ** - :ascii or :unicode (default unicode)
-  * The second argument is a block which includes calls the to the **row **method
-* **row {block} **
-  * **:header ** - Set to true to indicate if this is a header row in the table.
-  * **:color ** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
-  * **:bold ** - true|false to boldface the font
-* **column(string, hash) **
-  * **text ** - String to display in the table cell
-  * **options ** - The options to define the column
+    * **:border** - true|false indicates whether to include borders around the table cells
+    * **:encoding** - :ascii or :unicode (default unicode)
+  * The second argument is a block which includes calls the to the**row**method
+* **row {block}**
+  * **:header** - Set to true to indicate if this is a header row in the table.
+  * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
+  * **:bold** - true|false to boldface the font
+* **column(string, hash)**
+  * **text** - String to display in the table cell
+  * **options** - The options to define the column
     * :width - defines the width of the column
     * :padding - The number of spaces to put on both the left and right of the text.
     * :align - Allowed values are left|right|center
     * :color - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
     * :bold - true|false to boldface the font
-* **suppress_output ** - Suppresses output stream that goes to STDOUT
-* **capture_output ** - Captures all of the output stream to a string and restores output to STDOUT
-* **restore_output ** - Restores the output stream to STDOUT
+* **suppress_output** - Suppresses output stream that goes to STDOUT
+* **capture_output** - Captures all of the output stream to a string and restores output to STDOUT
+* **restore_output** - Restores the output stream to STDOUT
 
 ### Contributors
 
