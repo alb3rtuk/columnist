@@ -75,12 +75,12 @@ There are several methods the mixin provides that do not depend on the formatter
     formatters are (**Default: 'nested'**):
   * 'progress' - Use the progress formatter
   * 'nested' - Use the nested (or documentation) formatter
-* **horizontal**rule(hash)**
+* **horizontal_rule(hash)**
   * **:char** - The character used to build the rule. **Default: '-'**
   * **:width** - The width in characters of the rule. **Default: 100**
   * **:color** - The color to use for the terminal output i.e. 'red' or 'blue' or 'green'
   * **:bold** - true|false to boldface the font
-* **vertical**spacing(int)**
+* **vertical_spacing(int)**
   * Number of blank lines to output. **Default: 1**
 * **datetime(hash)**
   * **:align** - 'left'|'center'|'right' alignment of the timestamp. **Default: 'left'**
