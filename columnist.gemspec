@@ -4,7 +4,7 @@ require 'date'
 
 Gem::Specification.new do |s|
     s.name = 'columnist'
-    s.version = '1.0.0'
+    s.version = '1.1.0'
     s.date = Date.today.to_s
     s.summary = 'A tool for building interactive command line reports'
     s.description = 'A quick & easy way to generate reports on the the command line'
