@@ -2,9 +2,11 @@ $LOAD_PATH << File.expand_path(File.join('..', 'lib'), __FILE__)
 
 require 'date'
 
+require_relative 'version'
+
 Gem::Specification.new do |s|
     s.name = 'columnist'
-    s.version = '1.1.0'
+    s.version = VERSION
     s.date = Date.today.to_s
     s.summary = 'A tool for building interactive command line reports'
     s.description = 'A quick & easy way to generate reports on the the command line'
@@ -17,4 +19,3 @@ Gem::Specification.new do |s|
     s.add_dependency 'colored', '~> 1.2', '>= 1.2.0'
     s.add_development_dependency 'bundler', '~> 1.0', '>= 1.0.0'
 end
-
