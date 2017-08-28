@@ -7,13 +7,13 @@ module Columnist
 
         def initialize(options = {})
             self.validate_options(options, *VALID_OPTIONS)
-            self.columns = []
-            self.border = false
-            self.header = options[:header] || false
-            self.color = options[:color]
+            self.columns      = []
+            self.border       = false
+            self.header       = options[:header] || false
+            self.color        = options[:color]
             self.border_color = options[:border_color]
-            self.bold = options[:bold] || false
-            self.encoding = options[:encoding] || :unicode
+            self.bold         = options[:bold] || false
+            self.encoding     = options[:encoding] || :unicode
         end
 
         def add(column)
@@ -32,7 +32,7 @@ module Columnist
             screen_count.times do |sr|
                 border_char = use_utf8? ? "\u2503" : '|'
                 border_char = colorize(border_char, self.border_color)
-                line = (self.border) ? "#{border_char} " : ''
+                line        = (self.border) ? "#{border_char} " : ''
                 self.columns.size.times do |mc|
                     col = self.columns[mc]
                     # Account for the fact that some columns will have more screen rows than their

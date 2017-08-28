@@ -2,36 +2,36 @@ require 'singleton'
 require 'colored'
 
 module Columnist
-  class ProgressFormatter
-    include Singleton
-    include OptionsValidator
+    class ProgressFormatter
+        include Singleton
+        include OptionsValidator
 
-    VALID_OPTIONS = [:indicator, :color, :bold]
-    attr_accessor *VALID_OPTIONS
+        VALID_OPTIONS = [:indicator, :color, :bold]
+        attr_accessor *VALID_OPTIONS
 
-    def format(options, block)
-      self.validate_options(options, *VALID_OPTIONS)
+        def format(options, block)
+            self.validate_options(options, *VALID_OPTIONS)
 
-      self.indicator = options[:indicator] if options[:indicator]
-      self.color = options[:color]
-      self.bold = options[:bold] || false
+            self.indicator = options[:indicator] if options[:indicator]
+            self.color     = options[:color]
+            self.bold      = options[:bold] || false
 
-      block.call
+            block.call
 
-      puts
+            puts
+        end
+
+        def progress(override = nil)
+            str = override || self.indicator
+
+            str = str.send(self.color) if self.color
+            str = str.send('bold') if self.bold
+
+            print str
+        end
+
+        def indicator
+            @indicator ||= '.'
+        end
     end
-
-    def progress(override = nil)
-      str = override || self.indicator
-
-      str = str.send(self.color) if self.color
-      str = str.send('bold') if self.bold
-
-      print str
-    end
-
-    def indicator
-      @indicator ||= '.'
-    end
-  end
 end

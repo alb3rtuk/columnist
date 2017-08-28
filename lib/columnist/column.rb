@@ -10,14 +10,14 @@ module Columnist
         def initialize(text = nil, options = {})
             self.validate_options(options, *VALID_OPTIONS)
             self.text_without_colors = text.to_s.gsub(/(.)\[\d{1,3};\d{1,3};\d{1,3}m/, '')
-            self.text = text.to_s
-            self.width = options[:width] || 10
-            self.align = options[:align] || 'left'
-            self.padding = options[:padding] || 0
-            self.color = options[:color] || nil
-            self.bold = options[:bold] || false
-            self.underline = options[:underline] || false
-            self.reversed = options[:reversed] || false
+            self.text                = text.to_s
+            self.width               = options[:width] || 10
+            self.align               = options[:align] || 'left'
+            self.padding             = options[:padding] || 0
+            self.color               = options[:color] || nil
+            self.bold                = options[:bold] || false
+            self.underline           = options[:underline] || false
+            self.reversed            = options[:reversed] || false
             raise ArgumentError unless self.width > 0
             raise ArgumentError unless self.padding.to_s.match(/^\d+$/)
         end
@@ -38,9 +38,9 @@ module Columnist
                 if x.length > 1
                     actual_length = 0
                     x.each do |z|
-                        z = z.gsub(/\A(.)\[\d{1,3};\d{1,3};\d{1,3}m/, '').gsub(/\s+(.)\[\d{1,3};\d{1,3};\d{1,3}m\z/, '')
+                        z                    = z.gsub(/\A(.)\[\d{1,3};\d{1,3};\d{1,3}m/, '').gsub(/\s+(.)\[\d{1,3};\d{1,3};\d{1,3}m\z/, '')
                         characters_to_ignore = 0
-                        matches_to_ignore = z.scan(/\[\d{1,3};\d{1,3};\d{1,3}m/)
+                        matches_to_ignore    = z.scan(/\[\d{1,3};\d{1,3};\d{1,3}m/)
                         matches_to_ignore.each do |match|
                             characters_to_ignore += match.length + 1
                         end
@@ -67,7 +67,7 @@ module Columnist
             # NOTE: For making underline and reversed work Change so that based on the
             # unformatted text it determines how much spacing to add left and right
             # then colorize the cell text
-            cell = str.empty? ? blank_cell : aligned_cell(str)
+            cell        = str.empty? ? blank_cell : aligned_cell(str)
             padding_str = ' ' * self.padding
             padding_str + colorize(cell) + padding_str
         end

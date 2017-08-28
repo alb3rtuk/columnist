@@ -7,17 +7,17 @@ module Columnist
 
         def initialize(options = {})
             self.validate_options(options, *VALID_OPTIONS)
-            self.border = options[:border] || false
+            self.border       = options[:border] || false
             self.border_color = options[:border_color] || false
-            self.width = options[:width] || false
-            self.encoding = options[:encoding] || Columnist::DEFAULTS[:encoding]
-            @rows = []
+            self.width        = options[:width] || false
+            self.encoding     = options[:encoding] || Columnist::DEFAULTS[:encoding]
+            @rows             = []
             raise ArgumentError, 'Invalid encoding' unless [:ascii, :unicode].include? self.encoding
         end
 
         def add(row)
             # Inheritance from the table
-            row.border = self.border
+            row.border       = self.border
             row.border_color = self.border_color
 
             # Inherit properties from the appropriate row
@@ -58,8 +58,8 @@ module Columnist
 
         def separator(type = 'middle')
             left, center, right, bar = use_utf8? ? utf8_separator(type) : ascii_separator
-            separator_str = left + self.rows[0].columns.map { |c| bar * (c.width + 2) }.join(center) + right
-            separator_str = colorize(separator_str, self.border_color)
+            separator_str            = left + self.rows[0].columns.map { |c| bar * (c.width + 2) }.join(center) + right
+            separator_str            = colorize(separator_str, self.border_color)
         end
 
         def use_utf8?
@@ -68,7 +68,7 @@ module Columnist
 
         def ascii_separator
             left = right = center = '+'
-            bar = '-'
+            bar  = '-'
             [left, right, center, bar]
         end
 
