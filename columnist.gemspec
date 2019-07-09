@@ -6,7 +6,7 @@ require_relative 'version'
 
 Gem::Specification.new do |s|
     s.name        = 'columnist'
-    s.version     = VERSION
+    s.version     = COLUMNIST_VERSION
     s.date        = Date.today.to_s
     s.summary     = 'A tool for building interactive command line reports'
     s.description = 'A quick & easy way to generate reports on the the command line'
